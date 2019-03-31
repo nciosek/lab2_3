@@ -11,4 +11,11 @@ class SimilarityFinderTest {
         int seq2[]={5,4,6,7,8,9};
         Assertions.assertEquals(0.5,finder.calculateJackardSimilarity(seq1,seq2));
     }
+
+    @Test public void SimilarityFinderTestSWithSequencesLenZero(){
+        SimilarityFinder finder=new SimilarityFinder();
+        int seq1[]={};
+        int seq2[]={};
+        Assertions.assertEquals(1.0,finder.calculateJackardSimilarity(seq1,seq2));
+    }
 }
