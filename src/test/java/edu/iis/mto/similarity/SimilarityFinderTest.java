@@ -3,6 +3,7 @@ package edu.iis.mto.similarity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+
 class SimilarityFinderTest {
 
     @Test public void SimilarityFinderTestGoodValue(){
@@ -17,5 +18,12 @@ class SimilarityFinderTest {
         int seq1[]={};
         int seq2[]={};
         Assertions.assertEquals(1.0,finder.calculateJackardSimilarity(seq1,seq2));
+    }
+
+    @Test public void SimilarityFinderTestValueEqualOneWithTheSameSequences(){
+        SimilarityFinder finder = new SimilarityFinder();
+        int seq1[]={1,2,3};
+        int seq2[]={1,2,3};
+        Assertions.assertEquals(1.0, finder.calculateJackardSimilarity(seq1,seq2));
     }
 }
