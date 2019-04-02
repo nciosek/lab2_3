@@ -45,4 +45,13 @@ class SimilarityFinderTest {
 
         Assertions.assertEquals(0.0, similarityFinder.calculateJackardSimilarity(seq1,seq2), delta);
     }
+
+    @Test public void SimilarityFinderTestDifferentLengthElementsSequences(){
+        int seq1[] ={1,2,3};
+        int seq2[] = {1,2,3,6,7};
+        double delta = 0.01;
+        double result = calculateResult(seq1,seq2);
+
+        Assertions.assertEquals(result, similarityFinder.calculateJackardSimilarity(seq1,seq2), delta);
+    }
 }
