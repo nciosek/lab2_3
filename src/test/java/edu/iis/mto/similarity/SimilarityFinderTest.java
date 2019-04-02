@@ -43,5 +43,19 @@ class SimilarityFinderTest {
         Assertions.assertEquals(2.0, similarityFinder.calculateJackardSimilarity(seq1,seq2),delta);
     }
 
+    @Test public void calculateJackardSimilarityTestWithDifferentElements(){
+        SequenceSearcher sequenceSearcher = (key, seq) -> {
+                SearchResult.Builder builder = SearchResult.builder();
+                builder.withFound(false);
+                return builder.build();
+        };
+        SimilarityFinder similarityFinder = new SimilarityFinder(sequenceSearcher);
+
+        int seq1[] = {6,7,8,9};
+        int seq2[] = {1,2,3};
+        double delta = 0.01;
+
+        Assertions.assertEquals(0.0, similarityFinder.calculateJackardSimilarity(seq1,seq2),delta);
+    }
 
 }
