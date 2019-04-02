@@ -21,7 +21,7 @@ public class SimilarityFinder {
         return (double) intersectSize / (double) unionSize;
     }
 
-    private int calculateIntersect(int[] seq1, int[] seq2) {
+    public int calculateIntersect(int[] seq1, int[] seq2) {
         int intersectSize = 0;
         for (int elem : seq1) {
             if (searcher.search(elem, seq2)

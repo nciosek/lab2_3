@@ -3,34 +3,46 @@ package edu.iis.mto.similarity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-
 class SimilarityFinderTest {
+    SequenceSearcherDubler sequenceSearcherDubler = new SequenceSearcherDubler();
+    SimilarityFinder similarityFinder = new SimilarityFinder(sequenceSearcherDubler);
+
+    private double calculateResult(int[] seq1, int[] seq2) {
+        int numberOfTheSameValues = similarityFinder.calculateIntersect(seq1, seq2);
+        double result = (double) numberOfTheSameValues / (seq1.length + seq2.length - numberOfTheSameValues);
+        return result;
+    }
 
     @Test public void SimilarityFinderTestGoodValue(){
-        SimilarityFinder similarityFinder = new SimilarityFinder();
         int seq1[] = {1,2,3,4,5,6};
         int seq2[] = {5,4,6,7,8,9};
-        Assertions.assertEquals(0.5, similarityFinder.calculateJackardSimilarity(seq1,seq2));
+        double delta = 0.01;
+        double result = calculateResult(seq1,seq2);
+
+        Assertions.assertEquals(result, similarityFinder.calculateJackardSimilarity(seq1,seq2), delta);
     }
 
     @Test public void SimilarityFinderTestSWithSequencesLenZero(){
-        SimilarityFinder similarityFinder = new SimilarityFinder();
         int seq1[] = {};
         int seq2[] = {};
-        Assertions.assertEquals(1.0, similarityFinder.calculateJackardSimilarity(seq1,seq2));
+        double delta = 0.01;
+
+        Assertions.assertEquals(1.0, similarityFinder.calculateJackardSimilarity(seq1,seq2), delta);
     }
 
     @Test public void SimilarityFinderTestValueEqualOneWithTheSameSequences(){
-        SimilarityFinder similarityFinder = new SimilarityFinder();
         int seq1[] = {1,2,3};
         int seq2[] = {1,2,3};
-        Assertions.assertEquals(1.0, similarityFinder.calculateJackardSimilarity(seq1,seq2));
+        double delta = 0.01;
+
+        Assertions.assertEquals(1.0, similarityFinder.calculateJackardSimilarity(seq1,seq2), delta);
     }
 
     @Test public void SimilarityFinderTestValueEqualZeroWithDifferentSequences(){
-        SimilarityFinder similarityFinder = new SimilarityFinder();
         int seq1[] = {1,2,3};
         int seq2[] = {6,7,9};
-        Assertions.assertEquals(0.0, similarityFinder.calculateJackardSimilarity(seq1,seq2));
+        double delta = 0.01;
+
+        Assertions.assertEquals(0.0, similarityFinder.calculateJackardSimilarity(seq1,seq2), delta);
     }
 }
