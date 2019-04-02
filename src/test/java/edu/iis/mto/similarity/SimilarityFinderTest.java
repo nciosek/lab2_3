@@ -54,4 +54,13 @@ class SimilarityFinderTest {
 
         Assertions.assertEquals(result, similarityFinder.calculateJackardSimilarity(seq1,seq2), delta);
     }
+
+    @Test public void SimilarityFinderTestWithNegativeNumber(){
+        int seq1[] = {-1, -2, -3};
+        int seq2[] = {-4, -1, -5, -9};
+        double delta = 0.01;
+        double result = calculateResult(seq1,seq2);
+
+        Assertions.assertEquals(result, similarityFinder.calculateJackardSimilarity(seq1,seq2), delta);
+    }
 }
