@@ -104,4 +104,22 @@ class SimilarityFinderTest {
         similarityFinder.calculateJackardSimilarity(seq1, seq2);
         assertEquals(6.0, seq2[0], delta);
     }
+
+    @Test public void calculateJackardSimilarityTestWithOneSeqEmpty(){
+        SequenceSearcher sequenceSearcher = (key, seq) -> {
+            seq[0] ++;
+            SearchResult.Builder builder = SearchResult.builder();
+            builder.withFound(false);
+            return builder.build();
+        };
+
+        SimilarityFinder similarityFinder = new SimilarityFinder(sequenceSearcher);
+
+        int[] seq1 = {};
+        int[] seq2 = {0};
+        double delta = 0.01;
+
+        similarityFinder.calculateJackardSimilarity(seq1, seq2);
+        assertEquals(0.0, seq2[0], delta);
+    }
 }
